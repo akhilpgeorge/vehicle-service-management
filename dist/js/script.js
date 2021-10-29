@@ -39,7 +39,12 @@ $(document).ready(function(){
 				if(resp){
 					resp = JSON.parse(resp)
 					if(resp.status == 'success'){
-						location.replace(_base_url_+'admin');
+						if(resp.userType == 0){
+							location.replace(_base_url_+'user');
+						}
+						else{
+							location.replace(_base_url_+'admin');
+						}
 					}else if(resp.status == 'incorrect'){
 						var _frm = $('#login-frm')
 						var _msg = "<div class='alert alert-danger text-white err_msg'><i class='fa fa-exclamation-triangle'></i> Incorrect username or password</div>"
@@ -53,24 +58,24 @@ $(document).ready(function(){
 		})
 	})
 	//Establishment Login
-	$('#flogin-frm').submit(function(e){
-		e.preventDefault()
-		start_loader()
+	$('#register-frm').submit(function(e){
+		e.preventDefault();
+		start_loader();
 		if($('.err_msg').length > 0)
-			$('.err_msg').remove()
+		$('.err_msg').remove()
 		$.ajax({
-			url:_base_url_+'classes/Login.php?f=flogin',
+			url:_base_url_+'classes/Login.php?f=register',
 			method:'POST',
 			data:$(this).serialize(),
 			error:err=>{
 				console.log(err)
-
+				
 			},
 			success:function(resp){
 				if(resp){
 					resp = JSON.parse(resp)
 					if(resp.status == 'success'){
-						location.replace(_base_url_+'faculty');
+						location.replace(_base_url_+'?p=login');
 					}else if(resp.status == 'incorrect'){
 						var _frm = $('#flogin-frm')
 						var _msg = "<div class='alert alert-danger text-white err_msg'><i class='fa fa-exclamation-triangle'></i> Incorrect username or password</div>"
