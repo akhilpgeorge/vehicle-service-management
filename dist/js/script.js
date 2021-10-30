@@ -57,7 +57,7 @@ $(document).ready(function(){
 			}
 		})
 	})
-	//Establishment Login
+	//User registration
 	$('#register-frm').submit(function(e){
 		e.preventDefault();
 		start_loader();
