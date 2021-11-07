@@ -28,7 +28,7 @@ class Login extends DBConnection {
 
 			}
 			$this->settings->set_userdata('login_type',$userType);
-		return json_encode(array('status'=>'success', 'userType'=>$userType));
+		return json_encode(array('status'=>'success', 'userType'=>$userType, 'session' => $_SESSION));
 		}else{
 		return json_encode(array('status'=>'incorrect','last_qry'=>"SELECT * from users where email = '$username' and password = md5('$password') "));
 		}
