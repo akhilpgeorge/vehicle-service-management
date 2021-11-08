@@ -41,7 +41,7 @@
                     </li>
                     
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>user/?page=appoinments/manage_appointment" class="nav-link nav-schedule_settings">
+                      <a href="<?php echo base_url ?>user/?page=appointments/manage_appointment" class="nav-link nav-schedule_settings">
                         <i class="nav-icon fas fa-calendar-day"></i>
                         <p>
                           Schedule Appointment

@@ -1,5 +1,5 @@
 <?php
-require_once('../config.php');
+// require_once(`../../../../config.php`);
 // if(isset($_GET['id']) && $_GET['id'] > 0){
 //     $qry = $conn->query("SELECT * from `appointments` where id = '{$_GET['id']}' ");
 //     if($qry->num_rows > 0){
@@ -12,7 +12,12 @@ require_once('../config.php');
 //         $patient[$row['meta_field']] = $row['meta_value'];
 //     }
 // }
-?>
+
+if($_settings->chk_flashdata('success')): ?>
+<script>
+	alert_toast("<?php echo $_settings->flashdata('success') ?>",'success')
+</script>
+<?php endif;?>
 <style>
     #uni_modal .modal-content>.modal-footer {
         display: none;
@@ -53,7 +58,7 @@ require_once('../config.php');
                 </div>
                 <div class="form-group">
                     <label for="date_sched" class="control-label">Date</label>
-                    <input type="datetime-local" class="form-control" name="date_sched" value="<?php echo isset($date_sched) ? date("Y-m-d\TH:i", strtotime($date_sched)) : "" ?>" required>
+                    <input type="date" class="form-control" name="date_sched" value="<?php echo isset($patient['date_sched']) ? $patient['date_sched'] : '' ?>" required>
                 </div>
             </div>
             <div class="form-group d-flex justify-content-end w-100 form-group">

@@ -24,7 +24,7 @@
     }
 </style>
 <?php
-$sched_query = $conn->query("SELECT a.*,p.name FROM `appointments` a inner join `patient_list` p on a.patient_id = p.id");
+$sched_query = $conn->query("SELECT a.*,u.firstname FROM `appointments` a inner join `users` u on a.user_id = u.id");
 $sched_arr = json_encode($sched_query->fetch_all(MYSQLI_ASSOC));
 ?>
 <script>
@@ -64,7 +64,7 @@ $sched_arr = json_encode($sched_query->fetch_all(MYSQLI_ASSOC));
                                 console.log(bg)
                                 events.push({
                                     id          : scheds[k].id,
-                                    title          : scheds[k].name,
+                                    title          : scheds[k].veh_model,
                                     start          : moment(scheds[k].date_sched).format('YYYY-MM-DD[T]HH:mm'),
                                     backgroundColor: bg, 
                                     borderColor: bg, 
