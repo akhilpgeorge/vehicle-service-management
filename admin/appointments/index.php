@@ -1,3 +1,8 @@
+<?php if ($_settings->chk_flashdata('success')) : ?>
+    <script>
+        alert_toast("<?php echo $_settings->flashdata('success') ?>", 'success')
+    </script>
+<?php endif; ?>
 <style>
 #selectAll{
 	top:0
@@ -113,6 +118,7 @@
 			uni_modal("Appointment Form","appointments/manage_appointment.php",'mid-large')
 		})
 		$('.edit_data').click(function(){
+			// location.replace(_base_url_+"admin/appointments/manage_appointment.php/?id="+$(this).attr('data-id'));
 			uni_modal("Edit Appointment Details","appointments/manage_appointment.php?id="+$(this).attr('data-id'),'mid-large')
 		})
 		$('#selectAll').change(function(){
