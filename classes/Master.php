@@ -102,9 +102,9 @@ Class Master extends DBConnection {
 	function multiple_action(){
 		extract($_POST);
 		if($_action != 'delete'){
-			$stat_arr = array("pending"=>0,"confirmed"=>1,"cancelled"=>2);
-			$status = $stat_arr[$_action];
-			$sql = "UPDATE `appointments` set status = '{$status}' where patient_id in (".(implode(",",$ids)).") ";
+			// $stat_arr = array("pending"=>0,"confirmed"=>1,"cancelled"=>2);
+			$status = $_action;
+			$sql = "UPDATE `appointments` set status = '{$status}' where `id` in (".(implode(",",$ids)).") ";
 			$process = $this->conn->query($sql);
 			$this->capture_err();
 		}else{

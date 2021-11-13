@@ -24,10 +24,10 @@
 					</div>
 					<div class="col-3">
 						<select id="w_selected" class="custom-select select" >
-							<option value="pending">Mark as Pending</option>
-							<option value="confirmed">Mark as Confirmed</option>
-							<option value="cancelled">Mark as Cancelled</option>
-							<option value="delete">Delete</option>
+							<option value="0">Mark as Pending</option>
+							<option value="1">Mark as Confirmed</option>
+							<option value="2">Mark as Cancelled</option>
+							<option value="-1">Delete</option>
 						</select>
 					</div>
 					<div class="col">
@@ -67,7 +67,7 @@
 						<tr>
 							<td class="text-center">
 							<div class="form-check">
-								<input type="checkbox" class="form-check-input invCheck" value="<?php echo $row['id'] ?>">
+								<input type="checkbox" class="form-check-input invCheck" value="<?php echo $row['aid'] ?>">
 							</div>
 							</td>
 							<td class="text-center"><?php echo $i++; ?></td>
@@ -84,6 +84,9 @@
 									break; 
 									case(2): 
 										echo '<span class="badge badge-danger">Cancelled</span>';
+										break;
+									case(-1): 
+										echo '<span class="badge badge-secondary">Deleted</span>';
 									break; 
 									default: 
 										echo '<span class="badge badge-secondary">NA</span>';

@@ -44,6 +44,9 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
             case(2): 
                 echo '<span class="badge badge-danger">Cancelled</span>';
             break; 
+            case(-1): 
+                echo '<span class="badge badge-secondary">Deleted</span>';
+            break; 
             default: 
                 echo '<span class="badge badge-secondary">NA</span>';
         }
