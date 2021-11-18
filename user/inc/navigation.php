@@ -24,14 +24,6 @@
                 <nav class="mt-4">
                    <ul class="nav nav-pills nav-sidebar flex-column text-sm nav-compact nav-flat nav-child-indent nav-collapse-hide-child" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-item dropdown">
-                      <a href="./" class="nav-link nav-home">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                          Dashboard
-                        </p>
-                      </a>
-                    </li> 
-                    <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>user/?page=appointments" class="nav-link nav-appointments">
                         <i class="nav-icon fas fa-calendar"></i>
                         <p>
