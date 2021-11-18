@@ -55,7 +55,8 @@
 					<?php 
 					$i = 1;
 						// $qry = $conn->query("SELECT p.*,a.date_sched,a.status,a.id as aid from `patient_list` p inner join `appointments` a on p.id = a.patient_id  order by unix_timestamp(a.date_sched) desc ");
-						$qry = $conn->query("SELECT u.*,a.date_sched,a.status,a.id as aid from `users` u inner join `appointments` a on u.id = a.user_id  order by unix_timestamp(a.date_sched) desc ");
+						$user_id = $_SESSION['userdata']['id'];
+						$qry = $conn->query("SELECT u.*,a.date_sched,a.status,a.id as aid from `users` u inner join `appointments` a on u.id = a.user_id WHERE a.user_id=$user_id order by unix_timestamp(a.date_sched) desc ");
 						while($row = $qry->fetch_assoc()):
 					?>
 					
@@ -122,18 +123,18 @@
 			// 	$('.invCheck').prop("checked",false)
 			// }
 			var _this = $(this)
-			count = indiList.api().rows().data().length
-			for($i = 0 ; $i < count; $i++){
-				var node = indiList.api().row($i).node()
-				console.log($(node).find('.invCheck'))
-				if(_this.is(":checked") == true){
-					$(node).find('.invCheck').prop("checked",true)
-					$('#selected_opt').show('slow')
-				}else{
-					$(node).find('.invCheck').prop("checked",false)
-					$('#selected_opt').hide('slow')
-				}
-			}
+			// count = indiList.api().rows().data().length
+			// for($i = 0 ; $i < count; $i++){
+			// 	var node = indiList.api().row($i).node()
+			// 	console.log($(node).find('.invCheck'))
+			// 	if(_this.is(":checked") == true){
+			// 		$(node).find('.invCheck').prop("checked",true)
+			// 		$('#selected_opt').show('slow')
+			// 	}else{
+			// 		$(node).find('.invCheck').prop("checked",false)
+			// 		$('#selected_opt').hide('slow')
+			// 	}
+			// }
 		})
 		
 	})
