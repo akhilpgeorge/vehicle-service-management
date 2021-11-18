@@ -1,17 +1,13 @@
 <?php
-// require_once(`../../../../config.php`);
-// if(isset($_GET['id']) && $_GET['id'] > 0){
-//     $qry = $conn->query("SELECT * from `appointments` where id = '{$_GET['id']}' ");
-//     if($qry->num_rows > 0){
-//         foreach($qry->fetch_assoc() as $k => $v){
-//             $$k=$v;
-//         }
-//     }
-//     $qry2 = $conn->query("SELECT * FROM `patient_meta` where patient_id = '{$patient_id}' ");
-//     foreach($qry2->fetch_all(MYSQLI_ASSOC) as $row){
-//         $patient[$row['meta_field']] = $row['meta_value'];
-//     }
-// }
+require_once('../config.php');
+if(isset($_GET['id']) && $_GET['id'] > 0){
+    $qry = $conn->query("SELECT * from `appointments` where id = '{$_GET['id']}' ");
+    if($qry->num_rows > 0){
+        foreach($qry->fetch_assoc() as $k => $v){
+            $appointment[$k]=$v;
+        }
+    }
+}
 
 if($_settings->chk_flashdata('success')): ?>
 <script>
@@ -32,33 +28,33 @@ if($_settings->chk_flashdata('success')): ?>
         <h1 class="text-light">Book Service</h1>
         <div class="row" id="appointment">
             <div class="col-6" id="frm-field">
-                <!-- <input type="hidden" name="id" value="<?php //echo isset($id) ? $id : '' 
+                <input type="hidden" name="id" value="<?php echo isset($appointment['id']) ? $appointment['id'] : '' 
                                                             ?>">
-                <input type="hidden" name="patient_id" value="<?php //echo isset($patient_id) ? $patient_id : '' 
-                                                                ?>"> -->
+                <input type="hidden" name="user_id" value="<?php echo isset($appointment['user_id']) ? $appointment['user_id'] : '' 
+                                                                ?>">
                 <div class="form-group">
                     <label for="veh_model" class="control-label">Vehicle model</label>
-                    <input type="text" class="form-control" name="veh_model" value="<?php echo isset($patient['name']) ? $patient['name'] : '' ?>" required>
+                    <input type="text" class="form-control" name="veh_model" value="<?php echo isset($appointment['veh_model']) ? $appointment['veh_model'] : '' ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="veh_category" class="control-label">Vehicle category</label>
                     <select type="text" class="custom-select" name="veh_category" required>
                         <option disabled selected>Select category</option>
-                        <option value="2" <?php echo isset($patient['veh_category']) && $patient['veh_category'] == "2" ? "selected" : "" ?>>Two wheeler</option>
-                        <option value="4" <?php echo isset($patient['veh_category']) && $patient['veh_category'] == "4" ? "selected" : "" ?>>Four wheeler</option>
+                        <option value="2" <?php echo isset($appointment['veh_category']) && $appointment['veh_category'] == "2" ? "selected" : "" ?>>Two wheeler</option>
+                        <option value="4" <?php echo isset($appointment['veh_category']) && $appointment['veh_category'] == "4" ? "selected" : "" ?>>Four wheeler</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="veh_reg_no" class="control-label">Vehicle Registration number</label>
-                    <input type="text" class="form-control" name="veh_reg_no" value="<?php echo isset($patient['veh_reg_no']) ? $patient['veh_reg_no'] : '' ?>" required>
+                    <input type="text" class="form-control" name="veh_reg_no" value="<?php echo isset($appointment['veh_reg_no']) ? $appointment['veh_reg_no'] : '' ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="contact" class="control-label">Contact</label>
-                    <input type="text" class="form-control" name="contact" value="<?php echo isset($patient['contact']) ? $patient['contact'] : '' ?>" required>
+                    <input type="text" class="form-control" name="contact" value="<?php echo isset($appointment['contact']) ? $appointment['contact'] : '' ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="date_sched" class="control-label">Date</label>
-                    <input type="date" class="form-control" name="date_sched" value="<?php echo isset($patient['date_sched']) ? $patient['date_sched'] : '' ?>" required>
+                    <input type="date" class="form-control" name="date_sched" value="<?php echo isset($appointment['date_sched']) ? date("Y-m-d", strtotime($appointment['date_sched'])) : '' ?>" required>
                 </div>
             </div>
             <div class="form-group d-flex justify-content-end w-100 form-group">
