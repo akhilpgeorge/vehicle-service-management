@@ -21,6 +21,20 @@ window.alert_toast= function($msg = 'TEST',$bg = 'success' ,$pos=''){
 	  }
 
 $(document).ready(function(){
+	$('#logout-btn').click((e)=>{
+		e.preventDefault();
+		console.log("logout clicked");
+		$.ajax({
+			url:_base_url_+'classes/Login.php?f=logout',
+			method:'GET',
+			success: function(){
+				window.location.replace(_base_url_);
+			},
+			error: function(e){
+				console.log("logout error",e);
+			}
+		});
+	  });
 	// Login
 	$('#login-frm').submit(function(e){
 		e.preventDefault()

@@ -112,7 +112,8 @@ class SystemSettings extends DBConnection{
 	}
 	function sess_des(){
 		if(isset($_SESSION['userdata'])){
-				unset($_SESSION['userdata']);
+			unset($_SESSION['userdata']);
+			session_destroy();
 			return true;
 		}
 			return true;
