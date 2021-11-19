@@ -82,7 +82,5 @@
     </div>
   </div>
       </div>
-      <!-- /.content-wrapper -->
-      <?php require_once('inc/footer.php') ?>
   </body>
 </html>
