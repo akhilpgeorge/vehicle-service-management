@@ -55,6 +55,10 @@ if (isset($_GET['id']) && $_GET['id'] > 0) {
                     <label for="date_sched" class="control-label">Date</label>
                     <input type="date" class="form-control" name="date_sched" value="<?php echo isset($appointment['date_sched']) ? date("Y-m-d", strtotime($appointment['date_sched'])) : '' ?>" required>
                 </div>
+                <div class="form-group">
+                    <label for="comments" class="control-label">Comments</label>
+                    <textarea class="form-control" name="comments" value="<?php echo isset($appointment['comments']) ? $appointment['comments'] : '' ?>"> </textarea>
+                </div>
             </div>
             <?php if ($isEdit) : ?>
                 <div class="col-6">

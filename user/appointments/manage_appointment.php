@@ -56,6 +56,10 @@ if($_settings->chk_flashdata('success')): ?>
                     <label for="date_sched" class="control-label">Date</label>
                     <input type="date" class="form-control" name="date_sched" value="<?php echo isset($appointment['date_sched']) ? date("Y-m-d", strtotime($appointment['date_sched'])) : '' ?>" required>
                 </div>
+                <div class="form-group">
+                    <label for="comments" class="control-label">Comments</label>
+                    <textarea class="form-control" name="comments" value="<?php echo isset($appointment['comments']) ? $appointment['comments'] : '' ?>"> </textarea>
+                </div>
             </div>
             <div class="form-group d-flex justify-content-end w-100 form-group">
                 <button class="btn-primary btn">Submit Appointment</button>
