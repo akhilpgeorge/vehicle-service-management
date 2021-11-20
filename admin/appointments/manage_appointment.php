@@ -53,7 +53,7 @@ if (isset($_GET['id']) && $_GET['id'] > 0) {
                 </div>
                 <div class="form-group">
                     <label for="date_sched" class="control-label">Date</label>
-                    <input type="date" class="form-control" name="date_sched" value="<?php echo isset($appointment['date_sched']) ? date("Y-m-d\TH:i", strtotime($appointment['date_sched'])) : '' ?>" required>
+                    <input type="date" class="form-control" name="date_sched" value="<?php echo isset($appointment['date_sched']) ? date("Y-m-d", strtotime($appointment['date_sched'])) : '' ?>" required>
                 </div>
             </div>
             <?php if ($isEdit) : ?>
