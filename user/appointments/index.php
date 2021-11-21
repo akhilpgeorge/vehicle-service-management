@@ -4,12 +4,12 @@
 }
 </style>
 <div class="card card-outline card-primary">
-	<div class="card-header">
+	<!-- <div class="card-header">
 		<h3 class="card-title">List of Appointments</h3>
 		<div class="card-tools">
-			<a href="<?php echo base_url ?>user/?page=appointments/manage_appointment" id="create_new" class="btn btn-flat btn-primary"><span class="fas fa-plus"></span>  Create New</a>
+			<a href="<?php //echo base_url ?>user/?page=appointments/manage_appointment" id="create_new" class="btn btn-flat btn-primary"><span class="fas fa-plus"></span>  Create New</a>
 		</div>
-	</div>
+	</div> -->
 	<div class="card-body">
         <div class="container-fluid">
 			<div class="row" style="display:none" id="selected_opt">
