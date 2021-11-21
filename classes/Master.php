@@ -66,8 +66,13 @@ Class Master extends DBConnection {
 			// else
 			// $sql = "UPDATE `appointments` set date_sched = '{$date_sched}',patient_id = '{$patient_id}',`status` = '{$status}',`ailment` = '{$ailment}' where id = '{$id}' ";
 			extract($_POST);
-			$user_id = $_SESSION['userdata']['id'];
-			$sql = "INSERT INTO `appointments` set user_id = '{$user_id}', date_sched = '{$date_sched}', veh_model = '{$veh_model}', veh_category = '{$veh_category}', veh_reg_no = '{$veh_reg_no}', contact = '{$contact}', status = 0, comments = '{$comments}'";
+			if(empty($user_id)){
+				$user_id = $_SESSION['userdata']['id'];
+				$sql = "INSERT INTO `appointments` set user_id = '{$user_id}', date_sched = '{$date_sched}', veh_model = '{$veh_model}', veh_category = '{$veh_category}', veh_reg_no = '{$veh_reg_no}', contact = '{$contact}', status = 0, comments = '{$comments}'";
+			}
+			else {
+				$sql = "UPDATE `appointments` set date_sched = '{$date_sched}', veh_model = '{$veh_model}', veh_category = '{$veh_category}', veh_reg_no = '{$veh_reg_no}', contact = '{$contact}', comments = '{$comments}' where id=$id";
+			}
 
 			$save_sched = $this->conn->query($sql);
 			$this->capture_err();
