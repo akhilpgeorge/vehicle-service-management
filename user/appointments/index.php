@@ -12,7 +12,7 @@
 	</div> -->
 	<div class="card-body">
         <div class="container-fluid">
-			<div class="row" style="display:none" id="selected_opt">
+			<!-- <div class="row" style="display:none" id="selected_opt">
 				<div class="w-100 d-flex">
 					<div class="col-2">
 						<label for="" class="controllabel"> With Selected:</label>
@@ -29,7 +29,7 @@
 						<button class="btn btn-primary" type="button" id="selected_go">Go</button>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<table class="table table-bordered table-stripped" id="indi-list">
 				<colgroup>
 					<col width="5%">
@@ -149,18 +149,18 @@
 		});
 		// console.log(indiList)
 		$(indiList.fnGetNodes()).find('.invCheck').change(function(){
-			if($(this).is(":checked")==true){
-				if($('#selected_opt').is(':visible') == false){
-					$('#selected_opt').show('slow')
-				}
+			// if($(this).is(":checked")==true){
+			// 	if($('#selected_opt').is(':visible') == false){
+			// 		$('#selected_opt').show('slow')
+			// 	}
 				
-			}else{
-				if($(indiList.fnGetNodes()).find('.invCheck:checked').length <= 0){
-					if($('#selected_opt').is(':visible') == true){
-						$('#selected_opt').hide('slow')
-					}
-				}
-			}
+			// }else{
+			// 	if($(indiList.fnGetNodes()).find('.invCheck:checked').length <= 0){
+			// 		if($('#selected_opt').is(':visible') == true){
+			// 			$('#selected_opt').hide('slow')
+			// 		}
+			// 	}
+			// }
 			if($(indiList.fnGetNodes()).find('.invCheck:checked').length == $(indiList.fnGetNodes()).find('.invCheck').length){
 				$('#selectAll').prop('checked',true)
 			}else if($(indiList.fnGetNodes()).find('.invCheck:checked').length <= 0){
@@ -168,38 +168,6 @@
 			}else{
 				$('#selectAll').prop('checked',false)
 			}
-		})
-
-		$('#selected_go').click(function(){
-			start_loader();
-			var ids = [];
-			$(indiList.fnGetNodes()).find('.invCheck:checked').each(function(){
-				ids.push($(this).val())
-			})
-			var _action = $('#w_selected').val()
-			$.ajax({
-				url:_base_url_+'classes/Master.php?f=multiple_action',
-				method:"POST",
-				data:{ids:ids,_action:_action},
-				dataType:'json',
-				error:err=>{
-					console.log(err)
-					alert_toast("An error occured",'error');
-					end_loader();
-				},
-				success:function(resp){
-					if(typeof resp =='object' && resp.status == 'success'){
-						location.reload();
-					}else if(resp.status == 'failed' && !!resp.msg){
-						alert_toast(resp.msg,'error');
-                            end_loader()
-                    }else{
-						alert_toast("An error occured",'error');
-						end_loader();
-                        console.log(resp)
-					}
-				}
-			})
 		})
 	})
 </script>
