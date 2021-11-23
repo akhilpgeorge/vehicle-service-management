@@ -58,7 +58,7 @@ if($_settings->chk_flashdata('success')): ?>
                 </div>
                 <div class="form-group">
                     <label for="comments" class="control-label">Comments</label>
-                    <textarea class="form-control" name="comments"><?php echo isset($appointment['comments']) ? $appointment['comments'] : '' ?></textarea>
+                    <input type="text" class="form-control" name="comments" value="<?php echo isset($appointment['comments']) ? $appointment['comments'] : '' ?>">
                 </div>
             </div>
             <div class="form-group d-flex justify-content-end w-100 form-group">
