@@ -25,10 +25,13 @@
 					<div class="col-3">
 						<select id="w_selected" class="custom-select select" >
 							<option value="0">Mark as Pending</option>
-							<option value="1">Mark as Confirmed</option>
+							<option value="1">Mark as Finished</option>
 							<option value="2">Mark as Cancelled</option>
 							<option value="-1">Delete</option>
 						</select>
+					</div>
+					<div class="col-3" style="display:none" id="bill_amount_div">
+					<input type="text" class="form-control" name="bill_amount" id="bill_amount" required placeholder="Bill amount">
 					</div>
 					<div class="col">
 						<button class="btn btn-primary" type="button" id="selected_go">Go</button>
@@ -175,7 +178,16 @@
 			}else{
 				$('#selectAll').prop('checked',false)
 			}
-		})
+		});
+		$('#selected_opt').change((e) => {
+			if($('#w_selected').val() == 1){
+				$('#bill_amount_div').show();
+			}
+			else{
+				$('#bill_amount_div').hide();
+				$('#bill_amount').val("");
+			}
+		});
 
 		$('#selected_go').click(function(){
 			start_loader();
@@ -183,11 +195,15 @@
 			$(indiList.fnGetNodes()).find('.invCheck:checked').each(function(){
 				ids.push($(this).val())
 			})
-			var _action = $('#w_selected').val()
+			var _action = $('#w_selected').val();
+			var myData = {ids:ids,_action:_action};
+			if(_action == 1){
+				myData.bill_amount = $('#bill_amount').val();
+			}
 			$.ajax({
 				url:_base_url_+'classes/Master.php?f=multiple_action',
 				method:"POST",
-				data:{ids:ids,_action:_action},
+				data: myData,
 				dataType:'json',
 				error:err=>{
 					console.log(err)
