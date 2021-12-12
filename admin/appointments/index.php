@@ -88,6 +88,9 @@
 									case(2): 
 										echo '<span class="badge badge-danger">Cancelled</span>';
 										break;
+									case(3): 
+										echo '<span class="badge badge-danger">Paid</span>';
+										break;
 									case(-1): 
 										echo '<span class="badge badge-secondary">Deleted</span>';
 									break; 

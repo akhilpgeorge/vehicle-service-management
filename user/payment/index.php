@@ -240,7 +240,6 @@ if (isset($_GET['id']) && $_GET['id'] > 0) {
     var _base_url_ = '<?php echo base_url ?>';
     var appointment_id = '<?php echo $_GET['id'] ?>';
     $('#pay_button').click((e) => {
-        console.log("clicked");
         $('#pay_loader').show();
         $.ajax({
                 url: _base_url_ + "classes/Master.php?f=make_payment",
@@ -272,11 +271,12 @@ if (isset($_GET['id']) && $_GET['id'] > 0) {
                     //     console.log(resp)
                     // }
                     // end_loader();
-                    console.log("resp", resp);
+                    if(resp.status == "success"){
+                        setTimeout(() => {
+                            location.replace(_base_url_+'user');
+                        }, 5000);
+                    }
                 }
             })
-        setTimeout(() => {
-            
-        }, 2000);
     });
 </script>

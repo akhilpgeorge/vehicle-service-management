@@ -84,6 +84,9 @@
 									case(2): 
 										echo '<span class="badge badge-danger">Cancelled</span>';
 									break; 
+									case(3): 
+										echo '<span class="badge badge-success">Paid</span>';
+									break;
 									default: 
 										echo '<span class="badge badge-secondary">NA</span>';
                                 } 
