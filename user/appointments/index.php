@@ -56,7 +56,7 @@
 					$i = 1;
 						// $qry = $conn->query("SELECT p.*,a.date_sched,a.status,a.id as aid from `patient_list` p inner join `appointments` a on p.id = a.patient_id  order by unix_timestamp(a.date_sched) desc ");
 						$user_id = $_SESSION['userdata']['id'];
-						$qry = $conn->query("SELECT u.*,a.date_sched,a.status,a.id as aid from `users` u inner join `appointments` a on u.id = a.user_id WHERE a.user_id=$user_id order by unix_timestamp(a.date_sched) desc ");
+						$qry = $conn->query("SELECT u.*,a.date_sched,a.status,a.bill_amount ,a.id as aid from `users` u inner join `appointments` a on u.id = a.user_id WHERE a.user_id=$user_id order by unix_timestamp(a.date_sched) desc ");
 						while($row = $qry->fetch_assoc()):
 					?>
 					
@@ -76,11 +76,17 @@
 										echo '<span class="badge badge-primary">Pending</span>';
 									break; 
 									case(1): 
-									echo '<span class="badge badge-success">Confirmed</span>';
+									echo '<span class="badge badge-success">Finished</span>';
+									if(isset($row['bill_amount'])){
+										echo '<span class="badge badge-warning ml-2">Bill</span>';
+									}
 									break; 
 									case(2): 
 										echo '<span class="badge badge-danger">Cancelled</span>';
 									break; 
+									case(3): 
+										echo '<span class="badge badge-success">Paid</span>';
+									break;
 									default: 
 										echo '<span class="badge badge-secondary">NA</span>';
                                 } 
@@ -95,6 +101,9 @@
 				                    <a class="dropdown-item view_data" href="javascript:void(0)" data-id="<?php echo $row['aid'] ?>"> View</a>
 									<div class="divider"></div>
 									<a class="dropdown-item edit_data" href="javascript:void(0)" data-id="<?php echo $row['aid'] ?>"> Edit</a>
+									<?php if(isset($row['bill_amount']) && $row['bill_amount'] > 0 && $row['status'] == 1){
+										echo '<div class="divider"></div><a class="dropdown-item pay_appointment" href="javascript:void(0)" data-id="'.$row['aid'].'"> Pay</a>';
+									}?>
 				                  </div>
 							</td>
 						</tr>
@@ -116,6 +125,9 @@
 		$('.edit_data').click(function(){
 			location.replace(_base_url_+`user?page=appointments/manage_appointment&id=`+$(this).attr('data-id'));
 			// uni_modal("Edit Appointment Details","appointments/manage_appointment.php?id="+$(this).attr('data-id'),'mid-large')
+		})
+		$('.pay_appointment').click(function(){
+			location.replace(_base_url_+`user/payment?id=`+$(this).attr('data-id'));
 		})
 		$('#selectAll').change(function(){
 			// if($(this).is(":checked") == true){

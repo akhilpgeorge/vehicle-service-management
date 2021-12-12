@@ -109,7 +109,9 @@ Class Master extends DBConnection {
 		if($_action != 'delete'){
 			// $stat_arr = array("pending"=>0,"confirmed"=>1,"cancelled"=>2);
 			$status = $_action;
-			$sql = "UPDATE `appointments` set status = '{$status}' where `id` in (".(implode(",",$ids)).") ";
+			$sql = isset($bill_amount) 
+					? "UPDATE `appointments` set status = '{$status}', bill_amount = '{$bill_amount}' where `id` in (".(implode(",",$ids)).") " 
+					: "UPDATE `appointments` set status = '{$status}' where `id` in (".(implode(",",$ids)).") ";
 			$process = $this->conn->query($sql);
 			$this->capture_err();
 		}else{
@@ -152,6 +154,23 @@ Class Master extends DBConnection {
 		}
 		return json_encode($resp);
 	}
+	function make_payment(){
+		extract($_POST);
+		$sql = "UPDATE `appointments` set status = 3 where id ='{$id}'";
+		$payment = $this->conn->query($sql);
+		$this->capture_err();
+		if($payment){
+			$resp['status'] = 'success';
+			// $resp['name'] = $name;
+			$this->settings->set_flashdata('success',' Payment success');
+		}else{
+			$resp['status'] = 'failed';
+			$resp['msg'] = "There's an error while submitting the data.";
+			$resp['error'] = $this->capture_err();
+			$resp['query'] = $sql;
+	}
+	return json_encode($resp);
+}
 	
 }
 
@@ -167,6 +186,9 @@ switch ($action) {
 	break;
 	case 'save_sched_settings':
 		echo $Master->save_sched_settings();
+		break;
+	case 'make_payment':
+		echo $Master->make_payment();
 		break;
 	default:
 		// echo $sysset->index();
