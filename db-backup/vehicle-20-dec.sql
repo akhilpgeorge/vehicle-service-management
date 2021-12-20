@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 20, 2021 at 04:07 PM
+-- Generation Time: Dec 20, 2021 at 04:32 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -20,6 +20,63 @@ SET time_zone = "+00:00";
 --
 -- Database: `vehicle`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `appointments`
+--
+
+CREATE TABLE `appointments` (
+  `id` int(30) NOT NULL,
+  `user_id` int(30) NOT NULL,
+  `date_sched` datetime NOT NULL,
+  `veh_model` varchar(50) NOT NULL,
+  `veh_category` tinyint(1) NOT NULL DEFAULT 0,
+  `veh_reg_no` varchar(20) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `comments` text DEFAULT NULL,
+  `contact` bigint(15) NOT NULL,
+  `bill_amount` int(10) DEFAULT NULL,
+  `date_created` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `appointments`
+--
+
+INSERT INTO `appointments` (`id`, `user_id`, `date_sched`, `veh_model`, `veh_category`, `veh_reg_no`, `status`, `comments`, `contact`, `bill_amount`, `date_created`) VALUES
+(13, 40, '2021-11-21 14:33:00', 'model', 2, 'KL 34 ewrsdf', 2, NULL, 8787878, NULL, '2021-11-07 14:35:30'),
+(14, 40, '2021-11-21 00:00:00', 'asdsad', 2, 'KL 34 ewrsdf', 3, NULL, 24234324, 230, '2021-11-07 18:27:14'),
+(15, 40, '2021-11-19 00:00:00', 'adssad', 2, 'KL 34 ewrsdf', 2, NULL, 24234324, NULL, '2021-11-08 19:19:41'),
+(17, 40, '2021-11-26 00:00:00', 'model', 2, 'KL 34 ewrsdf', 0, NULL, 24234324, NULL, '2021-11-08 19:35:54'),
+(18, 41, '2021-11-13 00:00:00', 'model', 2, 'KL 34 ewrsdf', 2, NULL, 24234324, NULL, '2021-11-13 21:43:41'),
+(19, 41, '2021-11-14 00:00:00', 'model', 2, 'KL 34 ewrsdf', 2, NULL, 24234324, NULL, '2021-11-13 21:44:33'),
+(20, 41, '2021-11-21 00:00:00', 'model', 4, 'KL 34 ewrsdf', 2, NULL, 24234324, NULL, '2021-11-13 22:14:41'),
+(21, 41, '2021-11-27 00:00:00', 'model', 2, 'KL 34 ewrsdf', 0, 'asdasdsad,asdsadsad', 24234324, NULL, '2021-11-15 19:29:18'),
+(22, 41, '2021-11-16 00:00:00', 'Tiago', 4, 'KL 34 6379', 1, NULL, 9496365058, NULL, '2021-11-15 19:32:23'),
+(29, 40, '2021-11-26 00:00:00', 'sadasd', 2, 'KL 34 ewrsdf', 3, 'asdsadsad,asdsadsadsad,oil', 9496365058, 1000, '2021-11-24 21:39:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `schedule_settings`
+--
+
+CREATE TABLE `schedule_settings` (
+  `meta_field` text NOT NULL,
+  `meta_value` text NOT NULL,
+  `date_create` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `schedule_settings`
+--
+
+INSERT INTO `schedule_settings` (`meta_field`, `meta_value`, `date_create`) VALUES
+('day_schedule', 'Monday,Tuesday,Wednesday,Thursday,Friday', '2021-09-02 19:55:37'),
+('morning_schedule', '08:00,11:00', '2021-09-02 19:55:37'),
+('afternoon_schedule', '13:00,16:00', '2021-09-02 19:55:37');
 
 -- --------------------------------------------------------
 
@@ -88,6 +145,13 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `user_t
 --
 
 --
+-- Indexes for table `appointments`
+--
+ALTER TABLE `appointments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `service`
 --
 ALTER TABLE `service`
@@ -110,6 +174,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `appointments`
+--
+ALTER TABLE `appointments`
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `service`
